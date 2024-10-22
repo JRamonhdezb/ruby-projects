@@ -1,9 +1,13 @@
+
 class Player
   attr_accessor :name, :symbol, :positions_choosen
 
-  def initiliaze(name)
-    @name = name
+  def initialize(name)
+    self.name = name
     @symbol = nil 
     @positions_choosen = []
   end
+
+
 end
+
