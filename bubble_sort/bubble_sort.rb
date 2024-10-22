@@ -5,7 +5,7 @@ def bubble_sort(arr)
     cont = 0
     i = 0
     while i < arr.length
-      if i == 0
+      if i.zero?
         previous_number = arr[i]
         i += 1
         next
@@ -23,6 +23,6 @@ def bubble_sort(arr)
   p arr
 end
 
-bubble_sort([4,3,78,2,0,2])
-bubble_sort([6,5,3,1,8,7,2,4])
-bubble_sort([5,2,1,3,6,4])
+bubble_sort([4, 3, 78, 2, 0, 2])
+bubble_sort([6, 5, 3, 1, 8, 7, 2, 4])
+bubble_sort([5, 2, 1, 3, 6, 4])
