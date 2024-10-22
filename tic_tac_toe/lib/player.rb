@@ -9,5 +9,13 @@ class Player
   end
 
 
+  def choose_position
+    gets.chomp.to_i - 1
+  end
+
+  def add_position(n)
+    self.positions_choosen << n 
+  end
+
 end
 

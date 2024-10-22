@@ -12,5 +12,42 @@ while player1.symbol == player2.symbol
   player2.symbol = Game.get_symbol
 end
 Game.set_players_list(player1, player2)
-Game.get_players
+Game.print_players
+
+# Code section for only one round game
+game = Game.new
+Game.print_template
+
+loop do 
+  Game.players.each do |player|
+    break if game.positions_selected.length == 9
+    break if game.round_winner != nil
+    puts "#{player.name}, is your turn, choose a position for #{player.symbol}"
+    position = player.choose_position
+    while game.positions_selected.include? position
+      puts "#{player.name}, that position is filled, please choose another one."
+      position = player.choose_position
+    end
+    player.add_position(position)
+    game.positions_selected << position
+    game.board[position] = player.symbol
+    puts game.print_board
+    if Game.results.include? player.positions_choosen.sort
+      game.round_winner = player.name
+    end
+  end 
+
+  if game.positions_selected.length == 9
+    puts "End Game, there is no round winner"
+    break 
+  end
+  if game.round_winner != nil
+    puts "The round winner is #{game.round_winner}"
+    break
+  end
+    
+
+    
+end
+
 
