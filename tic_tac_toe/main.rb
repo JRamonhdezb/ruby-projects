@@ -15,14 +15,14 @@ Game.set_players_list(player1, player2)
 Game.print_players
 
 # Code section for only one round game
-round = 0
+round = 1
 next_round = true
-while round < Game.number_rounds && next_round
+while round <= Game.number_rounds && next_round
   game = Game.new
   Game.players.shuffle!
   puts "Tic-Tac_Toe game"
   Game.print_template
-  puts "Round Number #{round + 1}"
+  puts "Round Number #{round}"
 
   loop do 
     Game.players.each do |player|
@@ -53,13 +53,14 @@ while round < Game.number_rounds && next_round
     end    
     
   end
-  
+  break if round == 3
   loop do 
     puts "Do you want to play another round: y / n"
     answer = gets.chomp
     if answer.downcase == "y"
       player1.clear_positions
       player2.clear_positions
+      round += 1
       break
     end
     if answer.downcase == "n"
@@ -68,7 +69,7 @@ while round < Game.number_rounds && next_round
     end  
   end
 
-  round += 1
+  
 
 end
 
