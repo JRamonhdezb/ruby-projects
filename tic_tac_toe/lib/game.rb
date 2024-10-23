@@ -45,4 +45,8 @@ class Game
   def self.results
     RESULTS
   end
+
+  def self.number_rounds
+    @@number_rounds
+  end
 end

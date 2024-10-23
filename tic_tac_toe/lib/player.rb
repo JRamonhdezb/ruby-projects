@@ -17,5 +17,8 @@ class Player
     self.positions_choosen << n 
   end
 
+  def clear_positions
+    self.positions_choosen = []
+  end
 end
 

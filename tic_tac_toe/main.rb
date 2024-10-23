@@ -1,6 +1,6 @@
 require_relative "lib/game"
 require_relative "lib/player"
-
+require 'pry-byebug'
 # Section of code responsible for creating and setting up the two player objects.
 puts "Enter Player_1 name:"
 player1  = Player.new(gets.chomp)
@@ -15,39 +15,64 @@ Game.set_players_list(player1, player2)
 Game.print_players
 
 # Code section for only one round game
-game = Game.new
-Game.print_template
+round = 0
+next_round = true
+while round < Game.number_rounds && next_round
+  game = Game.new
+  Game.players.shuffle!
+  puts "Tic-Tac_Toe game"
+  Game.print_template
+  puts "Round Number #{round + 1}"
 
-loop do 
-  Game.players.each do |player|
-    break if game.positions_selected.length == 9
-    break if game.round_winner != nil
-    puts "#{player.name}, is your turn, choose a position for #{player.symbol}"
-    position = player.choose_position
-    while game.positions_selected.include? position
-      puts "#{player.name}, that position is filled, please choose another one."
+  loop do 
+    Game.players.each do |player|
+      break if game.positions_selected.length == 9
+      break if game.round_winner != nil
+      puts "#{player.name}, is your turn, choose a position for #{player.symbol}"
       position = player.choose_position
+      while game.positions_selected.include? position
+        puts "#{player.name}, that position is filled, please choose another one."
+        position = player.choose_position
+      end
+      player.add_position(position)
+      game.positions_selected << position
+      game.board[position] = player.symbol
+      puts game.print_board
+      if Game.results.include? player.positions_choosen.sort
+        game.round_winner = player.name
+      end
+    end 
+  
+    if game.positions_selected.length == 9
+      puts "End Game, there is no round winner"
+      break 
     end
-    player.add_position(position)
-    game.positions_selected << position
-    game.board[position] = player.symbol
-    puts game.print_board
-    if Game.results.include? player.positions_choosen.sort
-      game.round_winner = player.name
+    if game.round_winner != nil
+      puts "The round winner is #{game.round_winner}"
+      break
+    end    
+    
+  end
+  
+  loop do 
+    puts "Do you want to play another round: y / n"
+    answer = gets.chomp
+    if answer.downcase == "y"
+      player1.clear_positions
+      player2.clear_positions
+      break
     end
-  end 
-
-  if game.positions_selected.length == 9
-    puts "End Game, there is no round winner"
-    break 
+    if answer.downcase == "n"
+      next_round = false
+      break
+    end  
   end
-  if game.round_winner != nil
-    puts "The round winner is #{game.round_winner}"
-    break
-  end
-    
 
-    
+  round += 1
+
 end
+
+
+
 
 
