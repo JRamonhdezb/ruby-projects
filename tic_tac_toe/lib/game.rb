@@ -1,3 +1,4 @@
+# rubocop: disable Style Metrics
 class Game
   attr_reader :board, :positions_selected, :symbols
   attr_accessor :round_winner
