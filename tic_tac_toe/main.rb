@@ -38,10 +38,6 @@ while round <= Game.number_rounds && next_round
       game.board[position] = player.symbol
       puts game.print_board
       set = player.positions_choosen.sort
-      # if player.positions_choosen.length > 3 && Game.results.any? { |arr| (set & arr) == arr }
-      #   game.round_winner = player.name
-      # end
-      # game.round_winner = player.name if Game.results.include? set
       game.round_winner = player.name if Game.results.any? { |arr| (set & arr) == arr }
     end
 
@@ -70,5 +66,4 @@ while round <= Game.number_rounds && next_round
       break
     end
   end
-
 end
