@@ -1,11 +1,9 @@
 require_relative "lib/game"
-require_relative "lib/player"
 # require 'pry-byebug'
 # Section of code responsible for creating and setting up the two player objects.
 player1 = Player.new
 player2 = Player.new
-Game.set_players_list(player1, player2)
-Game.print_players
+Player.print_list
 
 # Code section for only one round game
 round = 1

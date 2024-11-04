@@ -8,8 +8,8 @@ class Player
   def initialize
     @@list << self
     self.name = fill_name
-    @symbol = random_symbol
-    @positions_choosen = []
+    self.symbol = random_symbol
+    self.positions_choosen = []
   end
 
   def choose_position
@@ -50,7 +50,7 @@ class Player
   end
 
   def self.print_list
-    puts "Player 1: #{Player.list[0].name}, symbol: #{Player.list[0].symbol}"
-    puts "Player 2: #{Player.list[1].name}, symbol: #{Player.list[1].symbol}"
+    puts "Player 1: #{Player.list[0].name} Symbol: #{Player.list[0].symbol}\n" \
+         "Player 2: #{Player.list[1].name} Symbol: #{Player.list[1].symbol}"
   end
 end
