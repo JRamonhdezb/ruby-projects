@@ -1,5 +1,4 @@
-# This is class that will create the game-boars for each game round
-class Board
+class Board # rubocop:disable Layout/EndOfLine,Style/Documentation
   attr_reader :board, :positions_selected
   attr_accessor :winner
 

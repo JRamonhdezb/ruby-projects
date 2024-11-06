@@ -1,7 +1,6 @@
-# rubocop: disable Style Metrics
-require_relative "board"
+require_relative "board" # rubocop:disable Layout/EndOfLine
 require_relative "player"
-class Game
+class Game # rubocop:disable Style/Documentation
   attr_accessor :rounds_number, :rounds_winners
 
 
@@ -40,18 +39,18 @@ class Game
   end
 
   def round_over?(board)
-    if board.positions_selected.length == 9 && board.winner == nil
+    if board.positions_selected.length == 9 && board.winner.nil? # rubocop:disable Style/GuardClause
       puts "End Game, there is no round winner"
       self.rounds_number += 1
-      return true
+      true
     end
   end
 
   def round_winner?(board)
-    unless board.winner.nil?
+    unless board.winner.nil? # rubocop:disable Style/GuardClause
       puts "The round winner is #{board.winner}"
-      self.rounds_winners << board.winner
-      return true
+      rounds_winners << board.winner
+      true
     end
   end
 
@@ -76,7 +75,6 @@ class Game
     end
     puts "The number of rounds played: #{rounds_number}"
     puts "The rounds winners:"
-    # p rounds_winners
     p winners
   end
 
@@ -87,9 +85,8 @@ class Game
   end
 
   def winners
-    rounds_winners.reduce(Hash.new(0)) do |result, player|
+    rounds_winners.each_with_object(Hash.new(0)) do |player, result|
       result[player] += 1
-      result
     end
   end
 end

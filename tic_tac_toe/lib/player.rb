@@ -1,5 +1,4 @@
-# rubocop: disable
-class Player
+class Player # rubocop:disable Layout/EndOfLine,Style/Documentation
   attr_accessor :name, :symbol, :positions_choosen
 
   SYMBOLS = %w[X O].freeze
