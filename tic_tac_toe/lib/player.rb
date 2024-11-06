@@ -31,7 +31,7 @@ class Player
   end
 
   def fill_name
-    puts "Please enter a player number: "
+    puts "Please enter a player name: "
     gets.chomp
   end
 
@@ -52,5 +52,11 @@ class Player
   def self.print_list
     puts "Player 1: #{Player.list[0].name} Symbol: #{Player.list[0].symbol}\n" \
          "Player 2: #{Player.list[1].name} Symbol: #{Player.list[1].symbol}"
+  end
+
+  def self.clear_positions
+    list.each do |player|
+      player.positions_choosen.clear
+    end
   end
 end
