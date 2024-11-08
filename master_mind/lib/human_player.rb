@@ -38,5 +38,3 @@ class HumanPlayer < Player
   
 end
 
-player_1 = HumanPlayer.new
-player_1.set_guess
