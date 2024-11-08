@@ -14,18 +14,39 @@ class ComputerPlayer < Player
     end
   end
 
-  def check_code(solution)
-    white_pin = 0
+  def check_code(set)
+    code = self.code
+    red_pin = same_index(set, code)
+    white_pin = in_other_index(set, code)
+    clue = ["white_pin: #{white_pin}", "red_pin: #{red_pin}"]
+    p clue
+  end
+
+  def same_index(set, code)
     red_pin = 0
-    solution.each_with_index do |color, index|
+    set.each_with_index do |color, index|
       if code.include?(color)
-        white_pin += 1 if code.index(color) != index
-        red_pin += 1 if code.index(color) == index
+        if code[index] == color
+          red_pin += 1 
+          code[index] = nil
+          set[index] = nil
+        end
       end
     end
-    clues = ["white_pin: #{white_pin}", "red_pin: #{red_pin}"]
-    p solution 
-    p clues
+    red_pin
+  end
+
+  def in_other_index(set, code)
+    white_pin = 0
+    set.each do |color|
+      next if color == nil
+      if code.include? color
+        white_pin += 1
+        i = code.index color
+        code[i] = "-"
+      end
+    end 
+    white_pin
   end
   
 end
@@ -33,5 +54,8 @@ end
 comp = ComputerPlayer.new
 comp.set_code
 p comp.code
-code = ["blue", "red", "black", "white"]
+# comp.code = ["yellow", "green", "green", "red"]
+# p comp.code
+code = ["blue", "black", "green", "white"]
+p code
 comp.check_code(code)
