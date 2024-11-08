@@ -15,11 +15,12 @@ class ComputerPlayer < Player
   end
 
   def check_code(set)
-    code = self.code
+    code = self.code.map { |color| color}
     red_pin = same_index(set, code)
     white_pin = in_other_index(set, code)
     clue = ["white_pin: #{white_pin}", "red_pin: #{red_pin}"]
     p clue
+    red_pin
   end
 
   def same_index(set, code)
@@ -51,11 +52,11 @@ class ComputerPlayer < Player
   
 end
 
-comp = ComputerPlayer.new
-comp.set_code
-p comp.code
-# comp.code = ["yellow", "green", "green", "red"]
+# comp = ComputerPlayer.new
+# comp.set_code
 # p comp.code
-code = ["blue", "black", "green", "white"]
-p code
-comp.check_code(code)
+# # comp.code = ["yellow", "green", "green", "red"]
+# # p comp.code
+# code = ["blue", "black", "green", "white"]
+# p code
+# comp.check_code(code)
