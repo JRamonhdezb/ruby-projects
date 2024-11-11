@@ -13,7 +13,6 @@ class HumanPlayer < Player
       color = get_valid_color
       next if is_twice?(color)
       self.guess << color
-      puts "Guess code: #{guess}"
       position += 1
     end
     puts "Guess code selected: #{guess}"
