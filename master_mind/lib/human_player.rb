@@ -8,7 +8,6 @@ class HumanPlayer < Player
 
   def set_guess
     position = 1
-    puts "Colors: #{Player::COLORS}"
     while guess.length < 4 
       puts "Please enter a color for your guess code in position ##{position}"
       color = get_valid_color
@@ -21,7 +20,7 @@ class HumanPlayer < Player
   end
 
   def get_valid_color
-    color = gets.chomp.downcase
+    color = gets.chomp.downcase.strip
     while COLORS.none? { |color_piece| color_piece == color}
       puts "Please enter a valid color. Valid colors: #{Player::COLORS} "
       color = gets.chomp.downcase
