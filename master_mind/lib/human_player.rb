@@ -1,5 +1,5 @@
-require_relative "player"
-class HumanPlayer < Player
+require_relative "player" # rubocop:disable Layout/EndOfLine
+class HumanPlayer < Player # rubocop:disable Style/Documentation
   attr_accessor :guess, :code, :remark
 
   def initialize # rubocop:disable Lint/MissingSuper

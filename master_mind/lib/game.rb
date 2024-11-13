@@ -1,6 +1,6 @@
-require_relative "human_player"
+require_relative "human_player" # rubocop:disable Layout/EndOfLine
 require_relative "computer_player"
-class Game
+class Game # rubocop:disable Style/Documentation
   attr_accessor :winner, :guesser, :coder
   attr_reader :rounds_number
 

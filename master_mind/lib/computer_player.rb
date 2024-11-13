@@ -1,6 +1,5 @@
-require_relative "player"
-require "pry-byebug"
-class ComputerPlayer < Player
+require_relative "player" # rubocop:disable Layout/EndOfLine
+class ComputerPlayer < Player # rubocop:disable Style/Documentation
   attr_accessor :code, :guess, :final_guess
 
   def initialize # rubocop:disable Lint/MissingSuper

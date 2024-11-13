@@ -1,4 +1,4 @@
-require_relative "lib/game"
+require_relative "lib/game" # rubocop:disable Layout/EndOfLine
 
 def game_flow
   loop do
@@ -8,7 +8,7 @@ def game_flow
   end
 end
 
-def play_again?
+def play_again? # rubocop:disable Metrics/MethodLength
   loop do
     puts "Do you want to play again? Aswer y / n"
     answer = gets.chomp.strip
