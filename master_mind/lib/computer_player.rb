@@ -1,10 +1,11 @@
 require_relative 'player'
 require 'pry-byebug'
 class ComputerPlayer < Player
-  attr_accessor :code 
+  attr_accessor :code, :guess
 
   def initialize
     @code = []
+    @guess = []
   end
 
   def set_code
@@ -49,14 +50,12 @@ class ComputerPlayer < Player
     end 
     white_pin
   end
+
+  def set_guess
+    while guess.length < 4
+      color = COLORS.sample
+      guess << color if guess.count(color) < 2
+    end
+  end
   
 end
-
-# comp = ComputerPlayer.new
-# comp.set_code
-# p comp.code
-# # comp.code = ["yellow", "green", "green", "red"]
-# # p comp.code
-# code = ["blue", "black", "green", "white"]
-# p code
-# comp.check_code(code)
