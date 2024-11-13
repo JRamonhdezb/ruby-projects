@@ -1,10 +1,11 @@
 require_relative 'player'
 class HumanPlayer < Player
-  attr_accessor :guess, :code
+  attr_accessor :guess, :code, :remark
 
   def initialize
     @guess = []
     @code = []
+    @remark = Array.new(4)
   end
 
   def set_guess
@@ -66,11 +67,18 @@ class HumanPlayer < Player
   def correct_pins(guess)
     correct_pins = 0
     guess.each_with_index do |color, index|
-      correct_pins += 1 if code[index] == color 
+      if code[index] == color 
+        correct_pins += 1 
+        equal_pins(color, index)
+      end
+      
     end
     correct_pins
   end
 
+  def equal_pins(color, index)
+    self.remark[index] = color 
+  end
 
 end
 
