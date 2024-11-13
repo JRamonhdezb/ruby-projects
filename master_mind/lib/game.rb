@@ -23,6 +23,7 @@ class Game
       guesser.set_guess
       result = coder.check_code(guesser.guess)
       break if game_over?(result)
+      guesser.review(coder.remark) if guesser.is_a? ComputerPlayer
       guesser.guess.clear
       round += 1
     end
@@ -37,7 +38,7 @@ class Game
 
   def print_result
       if winner != nil
-        puts "Congratulations, you guesser win the game."
+        puts "Congratulations, guesser wins the game."
       else 
         puts "Game over, coder wins the game"  
       end  
