@@ -1,11 +1,12 @@
 require_relative 'player'
 require 'pry-byebug'
 class ComputerPlayer < Player
-  attr_accessor :code, :guess
+  attr_accessor :code, :guess, :final_guess
 
   def initialize
     @code = []
     @guess = []
+    @final_guess = Array.new(4)
   end
 
   def set_code
@@ -52,10 +53,24 @@ class ComputerPlayer < Player
   end
 
   def set_guess
-    while guess.length < 4
-      color = COLORS.sample
-      guess << color if guess.count(color) < 2
+    self.guess = final_guess.map {|color| color}
+    guess.each_with_index do |value, index|
+      next if value != nil
+      loop do 
+        color = COLORS.sample
+        if guess.count(color) < 2
+          self.guess[index] = color
+          break
+        end
+      end        
     end
   end
   
+  def review(obs)
+    obs.each_with_index do |color, index|
+      next if color == nil
+      self.final_guess[index] = color
+    end 
+  end
+
 end
