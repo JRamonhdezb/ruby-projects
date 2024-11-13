@@ -1,28 +1,26 @@
 require_relative 'human_player'
 require_relative 'computer_player'
 class Game
-attr_reader :rounds_number, :guesser, :coder
-attr_accessor :winner
-COLORS =["red", "blue", "yellow", "green", "white", "black"]
+  attr_accessor :winner, :guesser, :coder
+  attr_reader :rounds_number
+  COLORS =["red", "blue", "yellow", "green", "white", "black"]
 
   def initialize
-    @guesser = HumanPlayer.new
-    @coder = ComputerPlayer.new
     @rounds_number = 12
     @winner = nil
+    self.set_players
   end
 
   def start
     round = 1
-    puts "Welcome to Mastermind game!, Computer set code to guess"
+    puts "Welcome to Mastermind game!, coder set code to guess"
     coder.set_code
+    puts "Secret code: #{coder.code}" if coder.is_a? HumanPlayer
     loop do 
       break if round > rounds_number
-      puts "Round number #{round}/#{rounds_number}"
-      puts "Colors to choose: #{COLORS}"
+      puts "Round number #{round}/#{rounds_number} \nColors to choose: #{COLORS}"
       guesser.set_guess
-      guess = guesser.guess
-      result = coder.check_code(guess)
+      result = coder.check_code(guesser.guess)
       break if game_over?(result)
       guesser.guess.clear
       round += 1
@@ -38,13 +36,37 @@ COLORS =["red", "blue", "yellow", "green", "white", "black"]
 
   def print_result
       if winner != nil
-        puts "Congratulations, you win the game."
+        puts "Congratulations, you guesser win the game."
       else 
-        puts "Sorry, game over you lose"  
+        puts "Game over, coder wins the game"  
       end  
       puts "Code to guess: #{coder.code}"
   end
 
+  def set_players
+    puts "MASTERMIND GAME \nDo you want to be the coder or guesser?"
+    option = nil
+    loop do 
+      puts "Enter 0 => Guesser  |  Enter 1 => Coder"
+      option = gets.chomp.to_i
+      if option.is_a? Integer
+        break if  (0..1) === option.to_i
+      else
+        puts "Try again. Enter valid option"
+      end
+    end
+    self.create_players(option)
+  end
+
+  def create_players(option)
+    if option == 0
+      @coder = ComputerPlayer.new
+      @guesser = HumanPlayer.new
+    else
+      @coder =  HumanPlayer.new
+      @guesser = ComputerPlayer.new
+    end
+  end
 end
 
 new_game = Game.new
