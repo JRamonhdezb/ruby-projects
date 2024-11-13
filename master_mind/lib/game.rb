@@ -18,7 +18,8 @@ class Game
     puts "Secret code: #{coder.code}" if coder.is_a? HumanPlayer
     loop do 
       break if round > rounds_number
-      puts "Round number #{round}/#{rounds_number} \nColors to choose: #{COLORS}"
+      puts "Round number #{round}/#{rounds_number}"
+      puts "Colors to choose: #{COLORS}" if guesser.is_a? HumanPlayer
       guesser.set_guess
       result = coder.check_code(guesser.guess)
       break if game_over?(result)
