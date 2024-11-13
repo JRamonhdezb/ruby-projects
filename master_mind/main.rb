@@ -4,22 +4,22 @@ def game_flow
   loop do
     new_game = Game.new
     new_game.start
-    break if play_again? == false 
+    break if play_again? == false
   end
 end
 
 def play_again?
-    loop do 
-      puts "Do you want to play again? Aswer y / n"
-      answer = gets.chomp.strip
-      if answer == "y"
-        return true
-      elsif answer == "n"
-        return false
-      else 
-        puts "Try again. Enter a valid input"  
-      end
+  loop do
+    puts "Do you want to play again? Aswer y / n"
+    answer = gets.chomp.strip
+    if answer == "y"
+      return true
+    elsif answer == "n"
+      return false
+    else
+      puts "Try again. Enter a valid input"
     end
+  end
 end
 
 game_flow

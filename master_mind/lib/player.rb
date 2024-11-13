@@ -1,7 +1,3 @@
-
 class Player
-
-  COLORS =["red", "blue", "yellow", "green", "white", "black"]
-
-  
+  COLORS = %w[red blue yellow green white black]
 end

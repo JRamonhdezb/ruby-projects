@@ -1,8 +1,8 @@
-require_relative 'player'
+require_relative "player"
 class HumanPlayer < Player
   attr_accessor :guess, :code, :remark
 
-  def initialize
+  def initialize # rubocop:disable Lint/MissingSuper
     @guess = []
     @code = []
     @remark = Array.new(4)
@@ -10,30 +10,31 @@ class HumanPlayer < Player
 
   def set_guess
     position = 1
-    while guess.length < 4 
+    while guess.length < 4
       puts "Please enter a color for your guess code in position ##{position}"
       color = get_valid_color
-      next if is_twice?(color, guess)
-      self.guess << color
+      next if twice?(color, guess)
+
+      guess << color
       position += 1
     end
     puts "Guess code selected: #{guess}"
   end
 
-  def get_valid_color
+  def get_valid_color # rubocop:disable Naming/AccessorMethodName
     color = gets.chomp.downcase.strip
-    while COLORS.none? { |color_piece| color_piece == color}
+    while COLORS.none? { |color_piece| color_piece == color }
       puts "Please enter a valid color. Valid colors: #{Player::COLORS} "
       color = gets.chomp.downcase.strip
     end
     color
   end
 
-  def is_twice? (color, set)
-    if set.count(color) >= 2
-      puts "Can only enter the same color two times in array code. Try again"
-      return true
-    end
+  def twice?(color, set)
+    return false unless set.count(color) >= 2
+
+    puts "Can only enter the same color two times in array code. Try again"
+    true
   end
 
   def set_code
@@ -41,8 +42,9 @@ class HumanPlayer < Player
     while code.length < 4
       puts "Enter a color for your secret code"
       color = get_valid_color
-      next if is_twice?(color, code)
-      self.code << color
+      next if twice?(color, code)
+
+      code << color
     end
   end
 
@@ -54,31 +56,27 @@ class HumanPlayer < Player
     red_pins = enter_number
     while red_pins != correct_pins(guess)
       puts "Please be honest. Enter again red pins number"
-      red_pins = enter_number      
+      red_pins = enter_number
     end
     red_pins
   end
 
   def enter_number
-      number = gets.chomp.to_i
-      number
+    gets.chomp.to_i
   end
 
   def correct_pins(guess)
     correct_pins = 0
     guess.each_with_index do |color, index|
-      if code[index] == color 
-        correct_pins += 1 
+      if code[index] == color
+        correct_pins += 1
         equal_pins(color, index)
       end
-      
     end
     correct_pins
   end
 
   def equal_pins(color, index)
-    self.remark[index] = color 
+    remark[index] = color
   end
-
 end
-
