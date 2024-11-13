@@ -47,16 +47,28 @@ class HumanPlayer < Player
 
   def check_code(guess)
     puts "|| Secret Code: #{code} || \n|| Computer Guess: #{guess} ||"
-    puts "Enter number of white pins:"
-    white_pin = enter_number
+    # puts "Enter number of white pins:"
+    # # white_pin = enter_number
     puts "Enter number of red pins:"
-    red_pin = enter_number
-    red_pin
+    red_pins = enter_number
+    while red_pins != correct_pins(guess)
+      puts "Please be honest. Enter again red pins number"
+      red_pins = enter_number      
+    end
+    red_pins
   end
 
   def enter_number
       number = gets.chomp.to_i
       number
+  end
+
+  def correct_pins(guess)
+    correct_pins = 0
+    guess.each_with_index do |color, index|
+      correct_pins += 1 if code[index] == color 
+    end
+    correct_pins
   end
 
 
