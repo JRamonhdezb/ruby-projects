@@ -1,8 +1,10 @@
 class Game
-  attr_accessor :secret_word
+  attr_accessor :secret_word, :secret_code, :tries
 
   def initialize
     @secret_word = pick_random_word
+    @secret_code = generate_code
+    @tries = 8
   end
 
   def pick_random_word
@@ -15,6 +17,11 @@ class Game
     return random_word
   end
 
+  def generate_code
+    size = secret_word.length
+    Array.new(size, "_")
+  end
+
 end
 
 
@@ -22,3 +29,5 @@ puts File.exist? "google-10000-english-no-swears.txt"
 game = Game.new
 puts game.secret_word
 puts game.secret_word.length
+puts "Word to guess: #{game.secret_code.join(" ")} "
+puts game.tries
