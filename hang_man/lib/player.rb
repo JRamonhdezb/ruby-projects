@@ -12,7 +12,7 @@ class Player
     puts "Please choose a letter that you think is part of the word to guess"
     letter = nil
     loop do 
-      letter = gets.chomp
+      letter = gets.chomp.downcase
       break if check_guess(letter) == true
     end
     letter
@@ -33,3 +33,4 @@ class Player
   end
 
 end
+
