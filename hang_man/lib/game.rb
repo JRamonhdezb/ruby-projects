@@ -39,6 +39,15 @@ class Game
     end
   end
 
+  def game_over?
+    if self.tries == 0
+      puts "No more attempts. Better luck next time.\nGAME OVER"
+      return true
+    else
+      return false
+    end
+  end
+
 end
 
 
