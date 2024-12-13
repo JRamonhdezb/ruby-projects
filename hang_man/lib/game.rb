@@ -56,6 +56,9 @@ class Game
          "Number of tries: #{self.tries}"
   end
 
+  def print_intro
+    intro = File.read('intro.txt')
+    puts intro
+  end
 
 end
-
