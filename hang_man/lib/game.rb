@@ -36,6 +36,7 @@ class Game
       end
     else
       self.player.wrong_guesses << letter 
+      self.tries -= 1
     end
   end
 
@@ -48,6 +49,12 @@ class Game
     end
   end
 
-end
+  def print_info
+    puts "Word to guess: #{secret_code.join(" ")}"
+    puts "Correct guesses: #{player.guessed_letters.join(", ")}"
+    puts "Wrong guesses: #{player.wrong_guesses.join(", ")}"
+    puts "Number of tries: #{self.tries}"
+  end
 
+end
 
