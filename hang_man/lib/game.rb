@@ -50,11 +50,12 @@ class Game
   end
 
   def print_info
-    puts "Word to guess: #{secret_code.join(" ")}"
-    puts "Correct guesses: #{player.guessed_letters.join(", ")}"
-    puts "Wrong guesses: #{player.wrong_guesses.join(", ")}"
-    puts "Number of tries: #{self.tries}"
+    puts "Word to guess: #{secret_code.join(" ")}" +
+         "Correct guesses: #{player.guessed_letters.join(", ")}" +
+         "Wrong guesses: #{player.wrong_guesses.join(", ")}" +
+         "Number of tries: #{self.tries}"
   end
+
 
 end
 
