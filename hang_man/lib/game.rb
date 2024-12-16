@@ -8,6 +8,7 @@ class Game
     @secret_code = generate_code
     @tries = 8
     @player = Player.new
+    # self.start
   end
 
   def pick_random_word
@@ -34,15 +35,28 @@ class Game
           self.player.guessed_letters << char
         end
       end
+      self.player.guessed_letters.uniq!
+      puts "how lucky you are!!"
     else
       self.player.wrong_guesses << letter 
       self.tries -= 1
+      puts "Wrong letter!!"
     end
   end
 
   def game_over?
     if self.tries == 0
       puts "No more attempts. Better luck next time.\nGAME OVER"
+      puts "The word to guess was #{secret_word}"
+      return true
+    else
+      return false
+    end
+  end
+
+  def game_won?
+    if secret_code.join == secret_word
+      puts "Congratulations, you guess the word. The answer is #{secret_word}"
       return true
     else
       return false
@@ -50,15 +64,26 @@ class Game
   end
 
   def print_info
-    puts "Word to guess: #{secret_code.join(" ")}" +
-         "Correct guesses: #{player.guessed_letters.join(", ")}" +
-         "Wrong guesses: #{player.wrong_guesses.join(", ")}" +
-         "Number of tries: #{self.tries}"
+    puts " Word to guess: #{secret_code.join(" ")}\n" +
+         " Correct guesses: #{player.guessed_letters.join(", ")}\n" +
+         " Wrong guesses: #{player.wrong_guesses.join(", ")}\n" +
+         " Number of tries: #{self.tries}"
   end
 
   def print_intro
     intro = File.read('intro.txt')
     puts intro
+  end
+
+  def start
+    self.print_intro
+    loop do 
+      print_info
+      char = player.give_guess
+      check_guess(char)
+      break if game_over? == true
+      break if game_won? == true
+    end
   end
 
 end
