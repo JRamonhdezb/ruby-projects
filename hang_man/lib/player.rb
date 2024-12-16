@@ -9,7 +9,7 @@ class Player
   end
   
   def give_guess 
-    puts "Please choose a letter that you think is part of the word to guess"
+    puts " Please choose a letter that you think is part of the word to guess"
     letter = nil
     loop do 
       letter = gets.chomp.downcase
@@ -23,11 +23,11 @@ class Player
       if self.guessed_letters.none? {|l| l == letter} && self.wrong_guesses.none? {|l| l == letter}
         return true
       else
-        puts "Please use a letter that has no be used in previous tries"
+        puts " Please use a letter that has no be used in previous tries"
         return false 
       end
     else 
-      puts "Please use a give a valid letter"
+      puts " Please use a give a valid letter"
       return false
     end
   end
