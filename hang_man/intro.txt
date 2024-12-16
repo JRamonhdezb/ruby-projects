@@ -1,6 +1,8 @@
                          !!!HANGMAN GAME!!!
+
  Hello, welcome to the game of hangman. The game is quite simple, the computer
   selects a random word, which you must guess in just 8 attempts, if you fail 
   all the attempts you lose. In each attempt you have the opportunity to give
   a letter that you think belongs to the word to be guessed. If you guess 
   all the letters correctly you win. Good luck!
+
