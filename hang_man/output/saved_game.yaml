@@ -1,0 +1,25 @@
+---
+:secret_word: corporate
+:secret_code:
+- _
+- _
+- r
+- p
+- _
+- r
+- a
+- t
+- e
+:tries: 4
+:player: !ruby/object:Player
+  guessed_letters:
+  - a
+  - e
+  - t
+  - p
+  - r
+  wrong_guesses:
+  - h
+  - s
+  - m
+  - g
