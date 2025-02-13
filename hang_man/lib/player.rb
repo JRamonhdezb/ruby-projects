@@ -32,5 +32,15 @@ class Player
     end
   end
 
+  def get_answer
+    puts "Answer y/n"
+    decision = nil
+    loop do 
+      decision = gets.chomp.downcase
+      break if decision == "y" or decision == "n"
+    end
+    decision
+  end
+
 end
 
