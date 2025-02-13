@@ -1,14 +1,15 @@
 require_relative 'player'
+require 'yaml'
 
 class Game
   attr_accessor :secret_word, :secret_code, :tries, :player
 
-  def initialize
-    @secret_word = pick_random_word
-    @secret_code = generate_code
-    @tries = 8
-    @player = Player.new
-    # self.start
+  def initialize(word = nil, code = nil,  number = nil, player = nil)
+    @secret_word = (word or pick_random_word)
+    @secret_code = (code or generate_code)
+    @tries = (number or 8)
+    @player = (player or Player.new)
+    self.start
   end
 
   def pick_random_word
@@ -18,7 +19,7 @@ class Game
       random_word = dictionary.sample.chomp
       break if (random_word.length >= 5 && random_word.length <= 12)
     end
-    return random_word
+    random_word
   end
 
   def generate_code
@@ -76,14 +77,60 @@ class Game
   end
 
   def start
+    load_game if File.size?('output/saved_game.yaml') 
     self.print_intro
     loop do 
       print_info
       char = player.give_guess
       check_guess(char)
-      break if game_over? == true
-      break if game_won? == true
+      exit if game_over? == true
+      exit if game_won? == true
+      exit if save? == true
     end
   end
 
+  def save?
+    puts "Do you want to save the game and finish it?"
+    if player.get_answer == "y"
+      Dir.mkdir('output') unless Dir.exist?('output')
+
+      filename = "output/saved_game.yaml"
+      File.open(filename, 'w') do |file|
+       file.puts self.to_yaml
+      end
+      puts print_info
+      return true
+    end
+  end
+
+  def load_game
+    puts "Do you want to load a saved game?"
+    if player.get_answer == "y"
+      string = File.read("output/saved_game.yaml")
+      File.open('output/saved_game.yaml', 'w') {|file| file.truncate(0) }
+      from_yaml(string)
+    end
+  end
+
+  def to_yaml
+    YAML.dump ({
+      :secret_word => @secret_word,
+      :secret_code => @secret_code,
+      :tries => @tries,
+      :player => @player
+    })
+  end
+
+  def from_yaml(string)
+    data = YAML.load(
+      string,
+      permitted_classes: [Player, Symbol]
+    )
+    # p data
+    # p data[:player]
+    Game.new(data[:secret_word], data[:secret_code], data[:tries], data[:player])
+  end
+
 end
+
+Game.new
